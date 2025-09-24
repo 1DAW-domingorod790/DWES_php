@@ -4,6 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+function dump($var){
+    echo '<pre>'.print_r($var,1).'</pre>';
+}
+
 
 //Función lógica presentación
 function getTableroMarkup($tableroData){
@@ -20,20 +24,21 @@ function getTableroMarkup($tableroData){
 //LÓGICA DE NEGOCIO
 //El tablero es un array bidimensional en el que cada fila contiene 12 palabras cuyos
 //valores pueden ser : agua, fuego, tierra, hierba
-$tablero = [
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-    ['agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra', 'agua', 'fuego',  'fuego', 'tierra'],
-];
+$archivoTablero = fopen('tablero.csv', 'r');
+
+function leerArchivo ($archivoTablero) {
+    $tablero = [];
+    while($material = fgetcsv($archivoTablero)) {
+        $tablero [] = $material;
+    
+    };
+
+    return $tablero;
+};
+
+$tablero = leerArchivo($archivoTablero);
+
+fclose($archivoTablero);
 
 
 //LÓGICA DE PRESENTACIÓN
@@ -45,7 +50,7 @@ $tableroMarkup = getTableroMarkup ($tablero);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- Minified version -->
@@ -54,9 +59,7 @@ $tableroMarkup = getTableroMarkup ($tablero);
         .contenedorTablero{
             width:604px;
             height: 604px;
-            border-radius: 5px;
-            border: solid 2px white;
-            box-shadow: grey;
+            border: 2px solid white;
         }
         .tile{
             width: 50px;
@@ -80,8 +83,10 @@ $tableroMarkup = getTableroMarkup ($tablero);
 <body>
     <h1>TABLERO DE VIDEOJUEGO</h1>
 
-    <div class="contenerdorTablero">
-        <?php echo $tableroMarkup; ?>
+    <div class="contenedorTablero">
+        <?php
+            echo $tableroMarkup;
+        ?>
     </div>
 
 </body>
