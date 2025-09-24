@@ -8,7 +8,6 @@ function dump($var){
     echo '<pre>'.print_r($var,1).'</pre>';
 }
 
-
 //Función lógica presentación
 function getTableroMarkup($tableroData){
     $output = '';
@@ -19,7 +18,6 @@ function getTableroMarkup($tableroData){
     }
     return $output;
 }
-
 
 //LÓGICA DE NEGOCIO
 //El tablero es un array bidimensional en el que cada fila contiene 12 palabras cuyos
@@ -32,18 +30,14 @@ function leerArchivo ($archivoTablero) {
         $tablero [] = $material;
     
     };
-
+    fclose($archivoTablero);
     return $tablero;
 };
 
 $tablero = leerArchivo($archivoTablero);
 
-fclose($archivoTablero);
-
-
 //LÓGICA DE PRESENTACIÓN
 $tableroMarkup = getTableroMarkup ($tablero);
-
 ?>
 
 
@@ -82,12 +76,10 @@ $tableroMarkup = getTableroMarkup ($tablero);
 </head>
 <body>
     <h1>TABLERO DE VIDEOJUEGO</h1>
-
     <div class="contenedorTablero">
         <?php
             echo $tableroMarkup;
         ?>
     </div>
-
 </body>
 </html>
