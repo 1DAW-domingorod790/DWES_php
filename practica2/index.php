@@ -28,7 +28,6 @@ function leerArchivo ($archivoTablero) {
     $tablero = [];
     while($material = fgetcsv($archivoTablero)) {
         $tablero [] = $material;
-    
     };
     fclose($archivoTablero);
     return $tablero;
