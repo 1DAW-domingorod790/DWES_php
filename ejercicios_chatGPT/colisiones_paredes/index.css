@@ -1,0 +1,36 @@
+.dashboard-container {
+    height: 600px;
+    width: 600px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    border: 2px solid white;
+}
+
+.tile {
+    width: 50px;
+    height: 50px;
+    margin:0;
+    padding:0;
+    border-width:0;
+    background-image: url("464.jpg");
+    background-size: 209px;
+}
+
+.tierra {
+    background-position: -106px 50px;
+}
+
+.agua {
+    background-position: -54px -2px;
+}
+
+.fuego {
+    background-position: -105px 154px;
+}
+
+.arrows-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
