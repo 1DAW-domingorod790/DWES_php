@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 include_once('functions.php');
 
-
+//LÓGICA DE NEGOCIO
 
 $dashboardFile = fopen("tablero.csv", 'r');
 
@@ -19,6 +19,8 @@ session_start();
 if (!isset($_SESSION['treassure'])) {
     $_SESSION['treassure'] = mapPosition(random_int(1, 12), random_int(1, 12));
 }
+
+//LÓGICA DE PRESENTACIÓN
 
 $dashboardMarkup = getDashboardMarkup($dashboardData, $characterPosition, $_SESSION['treassure']);
 

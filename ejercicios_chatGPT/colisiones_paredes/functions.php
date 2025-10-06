@@ -1,19 +1,6 @@
 <?php
-//LÓGICA DE NEGOCIO
 
-function dump($var){
-    echo '<pre>'.print_r($var,1).'</pre>';
-}
-
-function readFileCSV($file) {
-    $dashboard = [];
-    while ($material = fgetcsv($file)) {
-        $dashboard [] = $material;
-    };
-    fclose($file);
-    return $dashboard;
-}
-
+//FUNCIONES LÓGICAS DE PRESENTACIÓN
 function getDashboardMarkup ($dasboardData, $characterPosition, $treassurePosition) {
     $output = '';
     $cont = 0;
@@ -37,10 +24,6 @@ function getDashboardMarkup ($dasboardData, $characterPosition, $treassurePositi
         }   
     }
     return $output;
-}
-
-function mapPosition ($row, $column){
-    return (($row*12-12) + ($column - 1));
 }
 
 function getArrowsMarkup ($characterPosition) {
@@ -83,6 +66,25 @@ function getArrowsMarkup ($characterPosition) {
     return $output;
 }
 
+//LÓGICA DE NEGOCIO
+
+function dump($var){
+    echo '<pre>'.print_r($var,1).'</pre>';
+}
+
+function readFileCSV($file) {
+    $dashboard = [];
+    while ($material = fgetcsv($file)) {
+        $dashboard [] = $material;
+    };
+    fclose($file);
+    return $dashboard;
+}
+
+function mapPosition ($row, $column){
+    return (($row*12-12) + ($column - 1));
+}
+
 function generatePosition() {
     if(!isset($_GET['row']) && !isset($_GET['col'])){
         return mapPosition(9, 3);
@@ -90,7 +92,6 @@ function generatePosition() {
         return mapPosition($_GET['row'], $_GET['col']);
     }
 }
-
 
 function getWinMessage($characterPosition, $treassurePosition) {
     if ($characterPosition == $treassurePosition){
