@@ -61,8 +61,6 @@ function getArrowsMarkup ($characterPosition) {
     }
     $output .= '<div></div>';
 
-
-
     return $output;
 }
 
