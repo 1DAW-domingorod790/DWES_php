@@ -17,6 +17,10 @@ if ((isset($_GET['fila']) && isset($_GET['col'])) && ($_GET['fila'] > 0) && ($_G
     $fila = $_GET['fila'];
     $col = $_GET['col'];
     $personaje = mapPosition($fila, $col);
+}else {
+    header("HTTP/1.1 308 Permanent Redirect");
+    header("Location: ?fila=1&col=1");
+    die();
 }
 
 //LÓGICA DE PRESENTACIÓN
